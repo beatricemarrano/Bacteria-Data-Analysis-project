@@ -26,7 +26,8 @@ def dataLoad(filename):
     #building the data matrix Nx3 
     data= np.loadtxt(lines)
     #check the errors and skip that row
-    print("\n-> Data loading... deleting raws with Temperature not between 10 and 60,\nwith negative rate growth or with a type of bateria that is not 1,2,3 or 4\n")
+    print("\n-> Data loading... deleting raws with Temperature not between 10\
+          and 60, with negative rate growth or with a type of bateria that is not 1,2,3 or 4\n")
     count=0 #index row current data
     count1 = 0 #index row original data
     
@@ -125,25 +126,32 @@ def dataStatistics(data, statistic):
         v=data[:,0]
         result=np.mean(v)
         print("\nThe Mean Temperature is:", str(result))
-        print("\nDESCRIPTION: the mean temperature is the sum of all the temperatures considered in the data, divided by the total number of temperatures considered")
+        print("\nDESCRIPTION: the mean temperature is the sum of all the temperatures\
+              considered in the data, divided by the total number of temperatures considered")
  
     elif statistic=="Mean Growth rate":
         v=data[:,1]
         result=np.mean(v)    
         print("\nThe Mean Growth rate is:", str(result))
-        print("\nDESCRIPTION: the mean growth rate is the sum of all the growth rates considered in the data, divided by the total number of growth rates considered")
+        print("\nDESCRIPTION: the mean growth rate is the sum of all the growth \
+              rates considered in the data, divided by the total number of growth \
+                  rates considered")
         
     elif statistic=="Std Temperature":
         v=data[:,0]
         result=np.std(v)
         print("\nThe Std Temperature is:", str(result))
-        print("\nDESCRIPTION: the standard deviation of temperature is the square root of the average of the squared deviations from the mean, i.e., std = sqrt(mean(x)), where x = abs(data - data.mean())**2.")
+        print("\nDESCRIPTION: the standard deviation of temperature is the square\
+              root of the average of the squared deviations from the mean, \
+                  i.e., std = sqrt(mean(x)), where x = abs(data - data.mean())**2.")
         
     elif statistic=="Std Growth rate":
         v=data[:,1]
         result=np.std(v)
         print("\nThe Std Growth rate is:", str(result))
-        print("\nDESCRIPTION: The standard deviation of growth rate is the square root of the average of the squared deviations from the mean, i.e., std = sqrt(mean(x)), where x = abs(data - data.mean())**2.")
+        print("\nDESCRIPTION: The standard deviation of growth rate is the square\
+              root of the average of the squared deviations from the mean,\
+                  i.e., std = sqrt(mean(x)), where x = abs(data - data.mean())**2.")
         
     elif statistic=="Rows":
         result= np.shape(data)[0]
@@ -161,7 +169,9 @@ def dataStatistics(data, statistic):
         v=data[:,1]
         result=np.mean(v)
         print("\nThe Mean Cold Growth rate is:", str(result))
-        print("\nDESCRIPTION: the mean cold growth rate is the sum of all the growth rates considered in the data when tempearure is less than 20 degrees, divided by the total number of growth rates considered")
+        print("\nDESCRIPTION: the mean cold growth rate is the sum of all the\
+              growth rates considered in the data when tempearure is less than \
+                  20 degrees, divided by the total number of growth rates considered")
         
     elif statistic=="Mean Hot Growth rate": #when temperature>50
         count=0
@@ -174,7 +184,9 @@ def dataStatistics(data, statistic):
         v=data[:,1]
         result=np.mean(v)
         print("\nThe Mean Hot Growth rate is:", str(result))
-        print("\nDESCRIPTION: the mean hot growth rate is the sum of all the growth rates considered in the data when tempearure is grater than 50 degrees, divided by the total number of growth rates considered")    
+        print("\nDESCRIPTION: the mean hot growth rate is the sum of all the \
+              growth rates considered in the data when tempearure is grater \
+                  than 50 degrees, divided by the total number of growth rates considered")    
     
     return result
 
@@ -230,7 +242,8 @@ def dataPlot(data):
     growth3=np.zeros(1000)
     growth4=np.zeros(1000)
     
-    #creating 2 vectors that contains the temperature and the growth rate(for each type of bacteria) 
+    #creating 2 vectors that contains the temperature and the growth rate
+    #(for each type of bacteria) 
     for rows in data:
         if rows[2]==float(1):
             temp1[count1]=rows[0]
@@ -336,7 +349,8 @@ def displayMenu(options):
 '''-------------------------------    MAIN    --------------------------------'''
 '''---------------------------------------------------------------------------'''
 # Define menu items
-menuItems = np.array(["Load Data.", "Filter data", "Display statistics", "Generate plots", "Quit"]) 
+menuItems = np.array(["Load Data.", "Filter data", "Display statistics",
+                      "Generate plots", "Quit"]) 
 
 # Define empty name variable
 filename = ""
@@ -374,7 +388,9 @@ while True:
         else:
             # Filter data
             print("\nThere are 3 different choices for filtring data:\n")
-            filtered_condition_options=np.array(["Filter for Bacteria type Listeria", "Filter for growth rate between 0.5 and 1", "Disable all filters"])
+            filtered_condition_options=np.array(["Filter for Bacteria type Listeria", 
+                                                 "Filter for growth rate between 0.5 and 1",
+                                                 "Disable all filters"])
             
             while True:
                 # Display menu options and ask user to choose a menu item
@@ -389,11 +405,13 @@ while True:
                     # filtereddata= dataFilter(filteredconditions, data)
                     if f==2: 
                         f=3
-                        #filter from the already filtereddata because it is NOT the first time the user asks to filter
+                        #filter from the already filtereddata because it is NOT 
+                        #the first time the user asks to filter
                         filtereddata= dataFilter(filteredconditions, filtereddata)
                     else:
                         f=1
-                        #filter from the "original" data because it is the first time the user asks to filter
+                        #filter from the "original" data because it is the first 
+                        #time the user asks to filter
                         filtereddata= dataFilter(filteredconditions, data)
                     break
                 # ------------------------------------------------------------------ 
@@ -404,11 +422,13 @@ while True:
                     # filtereddata= dataFilter(filteredconditions, data)   
                     if f==1: 
                         f=3
-                        #filter from the already filtereddata because it is NOT the first time the user asks to filter
+                        #filter from the already filtereddata because it is NOT 
+                        #the first time the user asks to filter
                         filtereddata= dataFilter(filteredconditions, filtereddata) 
                     else:
                         f=2
-                        #filter from the "original" data because it is the first time the user asks to filter
+                        #filter from the "original" data because it is the first
+                        #time the user asks to filter
                         filtereddata= dataFilter(filteredconditions, data) 
                     break
                 # ------------------------------------------------------------------                
@@ -430,7 +450,8 @@ while True:
             print("\nError: You have to choose 1. Load data before any other options\n")
             # Is choice 2 already choosen?
         if filteredconditions== "":
-            print("\nError: You have to choose 2. Filter data before choosing 3. Display statistics\n")
+            print("\nError: You have to choose 2. Filter data before choosing \
+                  3. Display statistics\n")
 
         else:
             #the current filter is:
@@ -442,55 +463,59 @@ while True:
             if f==2:
                 print("for growth rate between 0.5 and 1\n") 
             if f==3:
-                print("for Bacteria type Listeria and for growth rate between 0.5 and 1\n")
+                print("for Bacteria type Listeria and for growth rate between\
+                      0.5 and 1\n")
             print(filtereddata)
 
             #display statistics
             print("\n There are 7 different choices for a statistic to be displayed:\n")
-            statistics_options=np.array(["Mean Temperature", "Mean Growth rate", "Std Temperature", "Std Growth rate", "Rows", "Mean Cold Growth rate", "Mean Hot Growth rate"])
+            statistics_options=np.array(["Mean Temperature", "Mean Growth rate",
+                                         "Std Temperature", "Std Growth rate",
+                                         "Rows", "Mean Cold Growth rate",
+                                         "Mean Hot Growth rate"])
             
             while True:
                 subchoice1= displayMenu(statistics_options)
                 statistic= ""
                 
                 #statistics_options chosen
-                # ------------------------------------------------------------------ 
+                # ------------------------------------------------------------- 
                 # 1. Mean Temperature
                 if subchoice1 == 1: 
                     statistic="Mean Temperature"
                     result= dataStatistics(filtereddata, statistic)
                     break
-                # ------------------------------------------------------------------ 
+                # ------------------------------------------------------------- 
                 # 2. Mean Growth rate
                 elif subchoice1 == 2:
                     statistic="Mean Growth rate"
                     result= dataStatistics(filtereddata, statistic)           
                     break
-                # ------------------------------------------------------------------             
+                # -------------------------------------------------------------             
                 # 3. Std Temperature
                 elif subchoice1 == 3:
                     statistic="Std Temperature"
                     result= dataStatistics(filtereddata, statistic)           
                     break
-                # ------------------------------------------------------------------ 
+                # ------------------------------------------------------------- 
                 # 4. Std Growth rate
                 elif subchoice1 == 4:
                     statistic="Std Growth rate"
                     result= dataStatistics(filtereddata, statistic)           
                     break
-                # ------------------------------------------------------------------ 
+                # ------------------------------------------------------------- 
                 # 5. Rows
                 elif subchoice1 == 5:
                     statistic="Rows"
                     result= dataStatistics(filtereddata, statistic)           
                     break
-                # ------------------------------------------------------------------ 
+                # ------------------------------------------------------------- 
                 # 6. Mean Cold Growth rate
                 elif subchoice1 == 6:
                     statistic="Mean Cold Growth rate"
                     result= dataStatistics(filtereddata, statistic)           
                     break
-                # ------------------------------------------------------------------ 
+                # ------------------------------------------------------------- 
                 # 7. Mean Hot Growth rate
                 elif subchoice1 == 7:
                     statistic="Mean Hot Growth rate"
@@ -505,7 +530,8 @@ while True:
             # Display error message 
             print("\nError: You have to choose 1. Load data before any other options\n")
         elif filteredconditions== "":
-            print("\nError: You have to choose 2.Filter data before choosing 4. Generate plot\n")
+            print("\nError: You have to choose 2.Filter data before choosing \
+                  4. Generate plot\n")
         else: 
             #the current filter is:
             print("The current filter is:\n" )
@@ -516,7 +542,8 @@ while True:
             if f==2:
                 print("for growth rate between 0.5 and 1\n") 
             if f==3:
-                print("for Bacteria type Listeria and for growth rate between 0.5 and 1\n")
+                print("for Bacteria type Listeria and for growth rate between \
+                      0.5 and 1\n")
             print(filtereddata)
             
             #generate plots
